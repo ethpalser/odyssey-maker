@@ -1,10 +1,10 @@
-class Scene:
+class Instance:
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     def __repr__(self) -> str:
-        str = "Scene"
+        str = "Instance"
         for key in self.__dict__:
             str += f"\n\t{key} : {self.__dict__[key]}"
         return str

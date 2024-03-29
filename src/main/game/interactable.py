@@ -1,8 +1,11 @@
+from action import actions
+
 class Interactable:
 
     def __init__(self, can_repeat = False):
         self.has_touched = False
         self.can_repeat = can_repeat
+        self.on_touch = None
 
     def __repr__(self):
         str = "Interactable"
@@ -10,10 +13,13 @@ class Interactable:
             str += f"\n\t{key} : {self.__dict__[key]}"
         return str
     
-    def on_touch(self, func):
-            self.touch_func = func()
+    def set_on_touch(self, action:str):
+            if action in actions:
+                self.on_touch = actions[action]
+            else:
+                self.on_touch = None
 
-    def touch(self):
+    def touch(self, *args):
         if not self.has_touched or self.can_repeat:
-             self.touch_func()
+             self.on_touch(*args)
         self.has_touched = True
